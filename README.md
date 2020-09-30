@@ -17,4 +17,6 @@ Now in browser type
 
 `http://localhost/politik-rest-2/`
 
+## Run Tests
+
 `php vendor/phpunit/phpunit/phpunit --verbose <project-root-path>\Tests\DataHandlingServiceTests.php`
