@@ -1,6 +1,5 @@
 <?php
 
-
 class FactionDTO
 {
     public $id;

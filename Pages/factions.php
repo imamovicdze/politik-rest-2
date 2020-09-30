@@ -1,5 +1,9 @@
+<?php
+/* @var $title string */
+/* @var $data FactionDTO[] */
+?>
 <div class="container">
-    <h1><?= $title ?></h1>
+    <h1 class="text-center"><?= $title ?></h1>
     <br><br>
     <table class="table">
         <thead>
@@ -12,14 +16,13 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach ($data as $councillor) { ?>
+        <?php foreach ($data as $faction) { ?>
             <tr>
-                <th scope="row"><?= $councillor->id ?> </th>
-                <td><?= $councillor->updated ?></td>
-
-                <td><?= $councillor->code ?></td>
-                <td><?= $councillor->name ?></td>
-                <td><?= $councillor->shortName ?></td>
+                <th scope="row"><?= $faction->id ?> </th>
+                <td><?= $faction->updated ?></td>
+                <td><?= $faction->code ?></td>
+                <td><?= $faction->name ?></td>
+                <td><?= $faction->shortName ?></td>
             </tr>
         <?php } ?>
         </tbody>

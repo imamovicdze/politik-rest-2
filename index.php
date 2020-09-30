@@ -1,17 +1,17 @@
 <!doctype html>
 <html lang="en">
 
-<?php include_once("Pages/partials/head.php"); ?>
-<?php include_once("Services/DataHandlingService.php"); ?>
-
-<body>
-
 <?php
+
+require 'Pages/partials/head.php';
+require 'Services/DataHandlingService.php';
+
 $pageNumber = isset($_GET['pageNumber']) ? $_GET['pageNumber'] : 1;
 $dataHandlingService = new DataHandlingService();
 
 ?>
 
+<body>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="<?= $_SERVER['PHP_SELF'] ?>">Politik Rest 2nd</a>

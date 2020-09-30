@@ -1,7 +1,8 @@
 <?php
+
 require 'vendor/autoload.php';
-include_once 'DTO/FactionDTO.php';
-include_once 'DTO/CouncillorsDTO.php';
+require 'DTO/FactionDTO.php';
+require 'DTO/CouncillorDTO.php';
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -31,7 +32,7 @@ class DataHandlingService
                 $councillors = json_decode($res->getBody());
 
                 foreach ($councillors as $councillor) {
-                    $data[] = new CouncillorsDTO($councillor);
+                    $data[] = new CouncillorDTO($councillor);
                 }
                 return $data;
             } else {
@@ -78,6 +79,8 @@ class DataHandlingService
     /**
      * Render content
      *
+     * @param $url
+     * @param $pageNumber
      * @throws GuzzleException
      */
     public function renderContent($url, $pageNumber)
@@ -87,20 +90,22 @@ class DataHandlingService
         if ((strpos($uri, 'factions') !== false)) {
             $factionsData = $this->getFactions();
 
-            $this->includeFileWithVariables('Pages/factions.php', array(
+            $this->includeFileWithVariables('Pages/factions.php', [
                 'data' => $factionsData,
                 'title' => 'Factions'
-            ));
+            ]);
         } elseif ((strpos($uri, 'councillors') !== false)) {
             $pageNumber = $this->parsePageNumber($pageNumber);
             $councillorsData = $this->getCouncillorsByPageNumber($pageNumber);
 
-            $this->includeFileWithVariables('Pages/councillors.php', array(
+            $this->includeFileWithVariables('Pages/councillors.php', [
                 'data' => $councillorsData,
                 'title' => 'Councillors'
-            ));
+            ]);
         } else {
-            echo '<br><hr></b><h1 class="text-center">Politik Rest 2</h1>';
+            $this->includeFileWithVariables('Pages/default.php', [
+                'title' => 'Politik Rest 2nd - index page'
+            ]);
         }
     }
 
@@ -112,7 +117,7 @@ class DataHandlingService
      */
     private function getCouncillorPageNumberUrl($pageNumber)
     {
-        return 'http://ws-old.parlament.ch/councillors?format=json&pageNumber=' . $pageNumber;
+        return 'http://ws-old.parlament.ch/councillors?entryDateFilter=2018/12/31&format=json&pageNumber=' . $pageNumber;
     }
 
     /**
