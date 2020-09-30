@@ -3,11 +3,14 @@
 
 <?php
 
+require 'vendor/autoload.php';
 require 'Pages/partials/head.php';
 require 'Services/DataHandlingService.php';
 
+use GuzzleHttp\Client;
+
 $pageNumber = isset($_GET['pageNumber']) ? $_GET['pageNumber'] : 1;
-$dataHandlingService = new DataHandlingService();
+$dataHandlingService = new DataHandlingService(new Client());
 
 ?>
 

@@ -9,6 +9,12 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class DataHandlingService
 {
+    public $client;
+
+    public function __construct($client) {
+        $this->client = $client;
+    }
+
     /**
      * Return councillors with pageNumber param
      *
@@ -18,11 +24,10 @@ class DataHandlingService
      */
     public function getCouncillorsByPageNumber($pageNumber)
     {
-        $client = new Client();
         $data = [];
 
         try {
-            $res = $client->request('GET', $this->getCouncillorPageNumberUrl($pageNumber), [
+            $res = $this->client->request('GET', $this->getCouncillorPageNumberUrl($pageNumber), [
                 'headers' => [
                     'Accept' => 'application/json'
                 ]
@@ -51,11 +56,10 @@ class DataHandlingService
      */
     public function getFactions()
     {
-        $client = new Client();
         $data = [];
 
         try {
-            $res = $client->request('GET', $this->getFactionsUrl(), [
+            $res = $this->client->request('GET', $this->getFactionsUrl(), [
                 'headers' => [
                     'Accept' => 'application/json'
                 ]
@@ -148,7 +152,7 @@ class DataHandlingService
      * @param $pageNumberStr
      * @return int
      */
-    private function parsePageNumber($pageNumberStr)
+    public function parsePageNumber($pageNumberStr)
     {
         $pageNumber = intval($pageNumberStr);
 

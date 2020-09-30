@@ -1,4 +1,10 @@
 <?php
 /* @var $title string */
 ?>
-<h1 class="text-center"><?= $title ?></h1>
+<br><br>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4"><?= $title ?></h1>
+        <p class="lead">Application render Councillors and Factions from external APIs</p>
+    </div>
+</div>
